@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>站长免代码管理控制台 · RUI studio CMS</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+SC:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Neobrutalism Stylesheets -->
+  <link rel="stylesheet" href="./src/css/variables.css">
+  <link rel="stylesheet" href="./src/css/reset.css">
+  <link rel="stylesheet" href="./src/css/components.css">
+  <link rel="stylesheet" href="./src/css/admin.css">
+  <!-- Protocol Check: Auto-redirect if opened directly via file:/// while server is running -->
+  <script>
+    if (window.location.protocol === 'file:') {
+      fetch('http://localhost:3000/', { mode: 'no-cors' })
+        .then(function() {
+          var target = window.location.pathname.toLowerCase().endsWith('admin.html') ? 'http://localhost:3000/admin.html' : 'http://localhost:3000/';
+          window.location.href = target;
+        })
+        .catch(function() {
+          document.addEventListener('DOMContentLoaded', function() {
+            var box = document.createElement('div');
+            box.style.cssText = 'position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:999999;max-width:92%;width:640px;background:#FFE600;border:3px solid #000;box-shadow:6px 6px 0 #000;padding:16px 20px;border-radius:12px;font-family:system-ui,sans-serif;font-weight:700;color:#000;';
+            box.innerHTML = '<div style="display:flex;align-items:flex-start;gap:12px;"><span style="font-size:1.8rem;line-height:1;">💡</span><div style="flex:1;"><div style="font-size:1.1rem;font-weight:900;margin-bottom:4px;">检测到您正在直接双击本地 HTML 文件打开</div><div style="font-size:0.88rem;line-height:1.6;font-weight:600;color:#222;">现代浏览器（Edge/Chrome）的安全沙箱机制会阻止本地文件的模块数据加载，导致展柜持续加载。<br>👉 <strong>一秒解决办法：</strong><br>1. 双击文件夹里的 <strong>【一键启动网站(开机后双击我).bat】</strong> 或 <strong>【点我直接进入个人站.url】</strong><br>2. 或直接在浏览器地址栏输入：<a href="http://localhost:3000/" style="color:#000;text-decoration:underline;font-weight:900;">http://localhost:3000/</a> 即可完美显示！</div></div><button onclick="this.parentElement.parentElement.remove()" style="background:#FFF;border:2px solid #000;font-weight:900;padding:4px 10px;cursor:pointer;border-radius:6px;box-shadow:2px 2px 0 #000;">✕</button></div>';
+            document.body.prepend(box);
+          });
+        });
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Top Sticky Admin Bar -->
+  <header class="admin-header">
+    <div class="admin-title-area">
+      <span style="font-size: 1.6rem;">⚙️</span>
+      <h1 style="font-size: 1.25rem; font-weight: 900; margin: 0;">
+        站长可视化内容管理系统
+      </h1>
+      <span class="admin-badge">NO-CODE CMS</span>
+    </div>
+
+    <div class="admin-actions">
+      <a href="./index.html" class="neo-btn neo-btn-green neo-btn-sm" title="前往主站查看真实渲染效果">
+        👀 查看并返回主站
+      </a>
+      <button id="btnExportBackup" class="neo-btn neo-btn-sm neo-btn-white" title="导出全站数据到电脑">
+        💾 备份导出
+      </button>
+      <button id="btnImportBackup" class="neo-btn neo-btn-sm neo-btn-white" title="从文件恢复数据">
+        📥 恢复导入
+      </button>
+      <input type="file" id="backupFileInput" accept=".json" style="display: none;">
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="admin-container">
+
+    <!-- Overall Statistics Row -->
+    <div class="stat-cards-row">
+      <div class="stat-card" style="border-left-width: 8px; border-left-color: var(--neo-pink);">
+        <div class="stat-number" id="statTotalItems">0</div>
+        <div class="stat-label">🎼 在架资源与服务项</div>
+      </div>
+      <div class="stat-card" style="border-left-width: 8px; border-left-color: var(--neo-yellow);">
+        <div class="stat-number" id="statTotalArticles">0</div>
+        <div class="stat-label">📝 已发布专栏文章</div>
+      </div>
+      <div class="stat-card" style="border-left-width: 8px; border-left-color: var(--neo-green);">
+        <div class="stat-number" id="statTotalFreebies">0</div>
+        <div class="stat-label">🎁 免费福利分享项</div>
+      </div>
+      <div class="stat-card" style="border-left-width: 8px; border-left-color: var(--neo-orange);">
+        <div class="stat-number">雪菲力总代</div>
+        <div class="stat-label">🥤 哈尔滨专区状态良好</div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <nav class="admin-tabs" aria-label="管理后台模块切换">
+      <button class="admin-tab-btn active" data-tab="tabItems">
+        <span>📦</span>
+        <span>资源与服务管理</span>
+      </button>
+      <button class="admin-tab-btn" data-tab="tabArticles">
+        <span>📝</span>
+        <span>专栏文章发布</span>
+      </button>
+      <button class="admin-tab-btn" data-tab="tabXuefeili">
+        <span>🥤</span>
+        <span>雪菲力专区设置</span>
+      </button>
+      <button class="admin-tab-btn" data-tab="tabProfile">
+        <span>👤</span>
+        <span>站长资料与全站配置</span>
+      </button>
+      <button class="admin-tab-btn" data-tab="tabBackup">
+        <span>🛠️</span>
+        <span>数据备份与系统重置</span>
+      </button>
+    </nav>
+
+    <!-- ================================================================= -->
+    <!-- TAB 1: 资源与服务管理                                             -->
+    <!-- ================================================================= -->
+    <section class="tab-panel active" id="tabItems">
+      <div class="panel-top-bar">
+        <div class="panel-title">
+          <span>📦</span>
+          <span>全部资源与服务清单</span>
+        </div>
+        <button id="btnOpenAddItemModal" class="neo-btn neo-btn-pink">
+          ➕ 新增资源或服务
+        </button>
+      </div>
+
+      <!-- Filter / Search Controls -->
+      <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+        <select id="itemsFilterCategory" class="form-select" style="max-width: 240px;">
+          <!-- Populated dynamically -->
+        </select>
+        <input 
+          type="text" 
+          id="itemsSearchInput" 
+          class="form-input" 
+          placeholder="快速搜索标题、标签或说明..."
+          style="flex: 1; min-width: 200px;"
+        >
+      </div>
+
+      <!-- Data Table -->
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th style="width: 80px;">角标</th>
+              <th>项目标题与简介</th>
+              <th style="width: 150px;">所属分类</th>
+              <th style="width: 140px;">标价文案</th>
+              <th style="width: 160px;">操作</th>
+            </tr>
+          </thead>
+          <tbody id="itemsTableBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 2: 专栏文章发布                                               -->
+    <!-- ================================================================= -->
+    <section class="tab-panel" id="tabArticles">
+      <div class="panel-top-bar">
+        <div class="panel-title">
+          <span>📝</span>
+          <span>专栏文章与经验分享</span>
+        </div>
+        <button id="btnOpenAddArticleModal" class="neo-btn neo-btn-yellow">
+          ➕ 发布新文章
+        </button>
+      </div>
+
+      <div id="articlesListContainer">
+        <!-- Dynamically populated articles -->
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 3: 雪菲力专区设置                                             -->
+    <!-- ================================================================= -->
+    <section class="tab-panel" id="tabXuefeili">
+      <div class="panel-top-bar">
+        <div class="panel-title">
+          <span>🥤</span>
+          <span>哈尔滨雪菲力一级经销看板配置</span>
+        </div>
+      </div>
+
+      <form id="xuefeiliForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">专区主标题</label>
+            <input type="text" id="xfTitle" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">角标微标签</label>
+            <input type="text" id="xfBadge" class="form-input" placeholder="例如：老哈味 / 现货直发">
+          </div>
+          <div class="form-group span-full">
+            <label class="form-label">专区宣传标语</label>
+            <input type="text" id="xfSlogan" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">口味 1 名称</label>
+            <input type="text" id="xfFlavor1Name" class="form-input" placeholder="经典荔枝味">
+          </div>
+          <div class="form-group">
+            <label class="form-label">口味 1 包装规格与价格</label>
+            <input type="text" id="xfFlavor1Spec" class="form-input" placeholder="24瓶整箱 / ¥48">
+          </div>
+          <div class="form-group">
+            <label class="form-label">口味 2 名称</label>
+            <input type="text" id="xfFlavor2Name" class="form-input" placeholder="经典甜橙味">
+          </div>
+          <div class="form-group">
+            <label class="form-label">口味 2 包装规格与价格</label>
+            <input type="text" id="xfFlavor2Spec" class="form-input" placeholder="24听整箱 / ¥48">
+          </div>
+          <div class="form-group span-full">
+            <label class="form-label">订购须知与配送说明</label>
+            <textarea id="xfNotice" class="form-textarea" placeholder="例如：支持哈尔滨同城自提与货拉拉极速派送..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="neo-btn neo-btn-orange">
+            💾 保存雪菲力专区设置
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 4: 站长资料与全站配置                                         -->
+    <!-- ================================================================= -->
+    <section class="tab-panel" id="tabProfile">
+      <div class="panel-top-bar">
+        <div class="panel-title">
+          <span>👤</span>
+          <span>站长信息、标语与状态配置</span>
+        </div>
+      </div>
+
+      <form id="profileForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">站长/工作室名称</label>
+            <input type="text" id="cfgSiteTitle" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">个性标语 / 身份定位</label>
+            <input type="text" id="cfgSlogan" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">微信号 (点击一键复制的目标)</label>
+            <input type="text" id="cfgWechat" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">所在城市 / 自提地点</label>
+            <input type="text" id="cfgLocation" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">当前接单状态提示语</label>
+            <input type="text" id="cfgStatusText" class="form-input" placeholder="例如：当前状态：营业接单中">
+          </div>
+          <div class="form-group">
+            <label class="form-label">状态类型指示点</label>
+            <select id="cfgStatusState" class="form-select">
+              <option value="live">🟢 正常营业接单中</option>
+              <option value="busy">🟡 录音制作繁忙中</option>
+              <option value="rest">🔴 暂停接单 / 外出休息</option>
+            </select>
+          </div>
+          <div class="form-group span-full">
+            <label class="form-label">个人站长简介 (Bio)</label>
+            <textarea id="cfgBio" class="form-textarea"></textarea>
+          </div>
+          <div class="form-group span-full">
+            <label class="form-label">顶部跑马灯滚动项目 (每行一条标语)</label>
+            <textarea id="cfgMarqueeItems" class="form-textarea" style="min-height: 120px;" placeholder="每行输入一条滚动标语"></textarea>
+            <span class="form-hint">提示：在每行前加上对应的 emoji 图标（例如 🎵 🎼 💻 🥤），视觉效果更棒！</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="neo-btn neo-btn-yellow">
+            💾 保存站长与全站配置
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- TAB 5: 数据备份与系统重置                                         -->
+    <!-- ================================================================= -->
+    <section class="tab-panel" id="tabBackup">
+      <div class="panel-top-bar">
+        <div class="panel-title">
+          <span>🛠️</span>
+          <span>数据安全中心与系统维护</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div class="neo-card" style="background: #FAF6ED;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">
+            💾 一键导出全站备份 (推荐定期备份)
+          </h3>
+          <p style="font-size: 0.9rem; color: #555; margin-bottom: 16px;">
+            将您在后台新增或修改的所有乐谱、教程、音频服务、雪菲力设置及专栏文章一键打包下载为本地 JSON 备份文件。即使清除浏览器缓存或更换电脑，随时可以导入还原。
+          </p>
+          <button onclick="document.getElementById('btnExportBackup').click();" class="neo-btn neo-btn-green">
+            📥 立即下载全站数据备份文件 (.json)
+          </button>
+        </div>
+
+        <div class="neo-card" style="background: #FAF6ED;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">
+            📤 导入并恢复备份
+          </h3>
+          <p style="font-size: 0.9rem; color: #555; margin-bottom: 16px;">
+            选择之前下载的备份文件，一键载入所有项目与配置。
+          </p>
+          <button onclick="document.getElementById('btnImportBackup').click();" class="neo-btn neo-btn-cyan">
+            📂 选择本地备份文件并导入
+          </button>
+        </div>
+
+        <div class="neo-card" style="background: #FFF0F0; border-color: #000;">
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #C00; margin-bottom: 8px;">
+            ⚠️ 恢复出厂初始预设
+          </h3>
+          <p style="font-size: 0.9rem; color: #555; margin-bottom: 16px;">
+            如果您在测试过程中打乱了数据，可以点击此按钮一键恢复到刚创建时的初始数据状态（包含完整的默认乐谱、视频、服务与雪菲力专区内容）。
+          </p>
+          <button id="btnResetDefaults" class="neo-btn neo-btn-white" style="color: red; border-color: red;">
+            ⚠️ 恢复出厂初始数据
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MODAL 1: 新增/编辑资源与服务项目                                  -->
+  <!-- ================================================================= -->
+  <div class="neo-modal-backdrop" id="itemEditModal" role="dialog" aria-modal="true">
+    <div class="neo-modal-box" style="max-width: 680px;">
+      <div class="modal-header">
+        <div class="modal-title" id="itemModalTitle">➕ 新增资源或服务</div>
+        <button class="modal-close-btn" id="itemModalCloseBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="itemEditForm">
+          <input type="hidden" id="editItemId">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">所属分类 *</label>
+              <select id="editItemCategory" class="form-select" required>
+                <option value="sheet_music">🎼 乐谱资源 (Sheet Music)</option>
+                <option value="video_courses">🎬 教学视频 (Video Courses)</option>
+                <option value="audio_engine">🎛️ 音频工程 (Audio Engineering)</option>
+                <option value="teaching_ppt">🎓 课件与教学 (Teaching & PPT)</option>
+                <option value="instruments_pc">🎹 乐器与电脑 (Instruments & PC)</option>
+                <option value="ai_tech">🤖 AI与电子 (Tech & AI)</option>
+                <option value="xuefeili_zone">🥤 哈尔滨雪菲力 (Local Xuefeili)</option>
+                <option value="freebies">🎁 免费福利专区 (Freebies)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">醒目角标文字</label>
+              <input type="text" id="editItemBadge" class="form-input" placeholder="例如：HOT / 推荐 / 爆款 / 原版">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">角标颜色风格</label>
+              <select id="editItemBadgeColor" class="form-select">
+                <option value="badge-yellow">亮黄色 (Yellow)</option>
+                <option value="badge-pink">热粉色 (Hot Pink)</option>
+                <option value="badge-green">青柠绿 (Green)</option>
+                <option value="badge-cyan">晴空青 (Cyan)</option>
+                <option value="badge-purple">神秘紫 (Purple)</option>
+                <option value="badge-orange">活力橙 (Orange)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">展示标价文案 *</label>
+              <input type="text" id="editItemPrice" class="form-input" placeholder="例如：¥ 20 / 套，或 ¥ 0.00 (免费)" required>
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">项目完整标题 *</label>
+              <input type="text" id="editItemTitle" class="form-input" placeholder="例如：Musicnotes 官方原版数字乐谱精选库" required>
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">参考数值金额 (用于右侧咨询单合计)</label>
+              <input type="number" id="editItemPriceValue" class="form-input" placeholder="0" min="0" step="0.5">
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">核心特性标签 (用逗号隔开)</label>
+              <input type="text" id="editItemTags" class="form-input" placeholder="例如：高清PDF, 原版指法, 伴奏音频, 顺丰包邮">
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">卡片展示简介 (1~2句话)</label>
+              <textarea id="editItemDesc" class="form-textarea" style="min-height: 80px;" placeholder="精炼介绍该资源或服务核心价值" required></textarea>
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">交付方式与服务周期说明</label>
+              <input type="text" id="editItemDelivery" class="form-input" placeholder="例如：网盘极速直发 / 24小时内交付 / 哈尔滨同城自提">
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">详细规格与补充信息 (在弹窗中展示)</label>
+              <textarea id="editItemDetails" class="form-textarea" style="min-height: 80px;" placeholder="更详细的说明，例如版本源文件格式、售后修改政策等"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="neo-btn neo-btn-white" id="itemModalCancelBtn">
+              取消
+            </button>
+            <button type="submit" class="neo-btn neo-btn-yellow">
+              💾 确认保存并生效
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MODAL 2: 新增/编辑专栏文章                                        -->
+  <!-- ================================================================= -->
+  <div class="neo-modal-backdrop" id="articleEditModal" role="dialog" aria-modal="true">
+    <div class="neo-modal-box" style="max-width: 720px;">
+      <div class="modal-header">
+        <div class="modal-title" id="articleModalTitle">➕ 撰写新专栏文章</div>
+        <button class="modal-close-btn" id="articleModalCloseBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="articleEditForm">
+          <input type="hidden" id="editArticleId">
+
+          <div class="form-grid">
+            <div class="form-group span-full">
+              <label class="form-label">文章主标题 *</label>
+              <input type="text" id="editArticleTitle" class="form-input" placeholder="例如：《从零打造低延迟无爆音录音混音宿主环境》" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">发布日期</label>
+              <input type="date" id="editArticleDate" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">醒目角标</label>
+              <input type="text" id="editArticleBadge" class="form-input" placeholder="例如：干货专栏 / 原创分享">
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">文章标签 (用逗号隔开)</label>
+              <input type="text" id="editArticleTags" class="form-input" placeholder="例如：音频科普, 宿主调优, ASIO避坑">
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">文章摘要 (显示在列表上)</label>
+              <textarea id="editArticleDesc" class="form-textarea" style="min-height: 70px;" placeholder="文章核心观点简述" required></textarea>
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label">文章正文内容 (支持输入段落 HTML 或纯文字)</label>
+              <textarea id="editArticleContent" class="form-textarea" style="min-height: 200px;" placeholder="支持输入文字或带有 <p><strong> 等格式的内容..." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="neo-btn neo-btn-white" id="articleModalCancelBtn">
+              取消
+            </button>
+            <button type="submit" class="neo-btn neo-btn-yellow">
+              🚀 立即发布并生效
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="neo-toast" id="adminToast" role="status">
+    <span style="font-size: 1.2rem;">⚡</span>
+    <span class="toast-text">设置已更新</span>
+  </div>
+
+  <script type="module" src="./src/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUI的小站 · 音乐制作 / 电脑硬件 / AI应用 / 哈尔滨雪菲力经销</title>
+  <meta name="description" content="RUI的个人综合门户：精选乐谱资源、名师教学视频、录音贴唱修音混音工程、课件PPT微课美化、乐器与电脑装机、AI编程与应用、哈尔滨雪菲力汽水一级经销批发与免费福利。">
+  <meta name="keywords" content="RUI的小站, 新野兽派, 音乐制作, 扒谱制谱, 修音混音, 乐谱下载, 钢琴古筝, 电脑组装, AI编程, 哈尔滨雪菲力, 课件制作">
+
+  <!-- Google Fonts: Space Grotesk & Archivo Black & Noto Sans SC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans+SC:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./src/css/variables.css">
+  <link rel="stylesheet" href="./src/css/reset.css">
+  <link rel="stylesheet" href="./src/css/layout.css">
+  <link rel="stylesheet" href="./src/css/components.css">
+  <!-- Protocol Check: Auto-redirect if opened directly via file:/// while server is running -->
+  <script>
+    if (window.location.protocol === 'file:') {
+      fetch('http://localhost:3000/', { mode: 'no-cors' })
+        .then(function() {
+          var target = window.location.pathname.toLowerCase().endsWith('admin.html') ? 'http://localhost:3000/admin.html' : 'http://localhost:3000/';
+          window.location.href = target;
+        })
+        .catch(function() {
+          document.addEventListener('DOMContentLoaded', function() {
+            var box = document.createElement('div');
+            box.style.cssText = 'position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:999999;max-width:92%;width:640px;background:#FFE600;border:3px solid #000;box-shadow:6px 6px 0 #000;padding:16px 20px;border-radius:12px;font-family:system-ui,sans-serif;font-weight:700;color:#000;';
+            box.innerHTML = '<div style="display:flex;align-items:flex-start;gap:12px;"><span style="font-size:1.8rem;line-height:1;">💡</span><div style="flex:1;"><div style="font-size:1.1rem;font-weight:900;margin-bottom:4px;">检测到您正在直接双击本地 HTML 文件打开</div><div style="font-size:0.88rem;line-height:1.6;font-weight:600;color:#222;">现代浏览器（Edge/Chrome）的安全沙箱机制会阻止本地文件的模块数据加载，导致展柜持续加载。<br>👉 <strong>一秒解决办法：</strong><br>1. 双击文件夹里的 <strong>【一键启动网站(开机后双击我).bat】</strong> 或 <strong>【点我直接进入个人站.url】</strong><br>2. 或直接在浏览器地址栏输入：<a href="http://localhost:3000/" style="color:#000;text-decoration:underline;font-weight:900;">http://localhost:3000/</a> 即可完美显示！</div></div><button onclick="this.parentElement.parentElement.remove()" style="background:#FFF;border:2px solid #000;font-weight:900;padding:4px 10px;cursor:pointer;border-radius:6px;box-shadow:2px 2px 0 #000;">✕</button></div>';
+            document.body.prepend(box);
+          });
+        });
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ================================================================ -->
+  <!-- 1. TOP STICKY NAVIGATION BAR (#nav)                              -->
+  <!-- ================================================================ -->
+  <nav id="nav" role="navigation" aria-label="全站主导航">
+    <div id="blog_name">
+      <a id="site-name" href="./index.html">
+        <span>⚡</span>
+        <span id="brandSiteName">RUI的小站</span>
+      </a>
+    </div>
+
+        <div class="nav-menus">
+      <button id="navSearchBtn" class="nav-menu-item" title="搜索全站资源">
+        <span>搜索</span>
+      </button>
+      <a href="./index.html" class="nav-menu-item active">
+        <span>主页</span>
+      </a>
+      <a href="#featuredSlider" class="nav-menu-item">
+        <span>推荐</span>
+      </a>
+      <a href="#content-inner" class="nav-menu-item">
+        <span>分类</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ================================================================ -->
+  <!-- 2. IMMERSIVE HERO HEADER (#page-header)                          -->
+  <!-- ================================================================ -->
+  <header id="page-header" role="banner">
+    <div id="site-info">
+      <h1 id="site-title">RUI的小站</h1>
+      
+      <div id="site-subtitle">
+        <span id="subtitle"></span>
+        <span class="typewriter-cursor"></span>
+      </div>
+
+      <div id="site_social_icons">
+        <button id="wechatSocialBtn" class="social-icon-btn" title="点击复制微信账号">
+          <span>微信咨询</span>
+        </button>
+        <a href="#featuredSlider" class="social-icon-btn">
+          <span>雪菲力专区</span>
+        </a>
+        <a href="#content-inner" class="social-icon-btn">
+          <span>音频工程与服务</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <div id="scroll-down" title="向下探索内容">
+      <span>⬇️</span>
+    </div>
+  </header>
+
+  <!-- ================================================================ -->
+  <!-- 3. MAIN TWO-COLUMN CONTAINER (.layout#content-inner)             -->
+  <!-- ================================================================ -->
+  <div class="layout" id="content-inner">
+
+    <!-- ============================================================== -->
+    <!-- LEFT SIDEBAR: Author Info, Announcement, Clean Categories      -->
+    <!-- ============================================================== -->
+    <aside class="aside-content" id="aside-content" aria-label="左侧站长资料与分类">
+
+      <!-- 1. Card Info (Author Profile) -->
+      <div class="card-widget card-info">
+        <div class="card-info-avatar">
+          <span>🎚️</span>
+        </div>
+        <div class="author-info__name" id="asideAuthorName">RUI</div>
+        <div class="author-info__description" id="asideAuthorBio">
+          人生不止眼前的苟且，还有音乐与雪菲力
+        </div>
+
+        <div class="card-info-data">
+          <div class="card-info-data-item">
+            <div class="headline">展品</div>
+            <div class="length-num" id="statAsideArticles">0</div>
+          </div>
+          <div class="card-info-data-item">
+            <div class="headline">分类</div>
+            <div class="length-num" id="statAsideCategories">0</div>
+          </div>
+          <div class="card-info-data-item">
+            <div class="headline">好评</div>
+            <div class="length-num">100%</div>
+          </div>
+        </div>
+
+        <button class="card-info-btn" onclick="document.getElementById('wechatSocialBtn')?.click();">
+          <span>加我微信 / Follow Me</span>
+        </button>
+
+        <div class="card-info-social-icons">
+          <span class="neo-badge badge-pink"># 哈尔滨</span>
+          <span class="neo-badge badge-cyan"># 音频老炮</span>
+          <span class="neo-badge badge-green"># 雪菲力总代</span>
+        </div>
+      </div>
+
+      <!-- 2. Card Announcement -->
+      <div class="card-widget card-announcement">
+        <div class="item-headline">
+          <span>公告 Announcement</span>
+        </div>
+        <div class="announcement_content">
+          <p style="margin-bottom: 8px;">
+            欢迎来到 <strong>RUI的小站</strong>！
+          </p>
+          <div style="background: var(--neo-green); border: var(--border-thin); border-radius: var(--radius-sm); padding: 4px 8px; font-size: 0.78rem; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+            <span style="width: 8px; height: 8px; background: #000; border-radius: 50%;"></span>
+            <span>当前状态：营业接单中</span>
+          </div>
+          <p style="font-size: 0.8rem; color: #444;">
+            哈尔滨雪菲力汽水整箱现货供应，支持同城自提与餐饮合作；贴唱录音、修音混音全天在线！
+          </p>
+        </div>
+      </div>
+
+      <!-- Sticky sub-container for Categories & Info -->
+      <div class="sticky_layout">
+        <!-- 3. Card Categories (Clean, without tags clutter) -->
+        <div class="card-widget card-categories">
+          <div class="item-headline">
+            <span>📁</span>
+            <span>分类目录 Categories</span>
+          </div>
+
+          <!-- Clean Categories List with counts -->
+          <ul class="card-category-list" id="aside-cat-list">
+            <!-- Populated dynamically via filter-search.js -->
+          </ul>
+        </div>
+
+        <!-- 4. Card Webinfo -->
+        <div class="card-widget card-webinfo">
+          <div class="item-headline">
+            <span>📊</span>
+            <span>站点资讯 Info</span>
+          </div>
+          <div class="webinfo">
+            <div class="webinfo-item">
+              <span>业务覆盖 :</span>
+              <span>8 大硬核领域</span>
+            </div>
+            <div class="webinfo-item">
+              <span>稳定运行 :</span>
+              <span>2020 - 2026</span>
+            </div>
+            <div class="webinfo-item">
+              <span>好评交付 :</span>
+              <span>100% 满意见证</span>
+            </div>
+            <div class="webinfo-item">
+              <span>服务坐标 :</span>
+              <span>黑龙江 · 哈尔滨</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ============================================================== -->
+    <!-- RIGHT MAIN CONTENT: Search, Featured Slider, Alternating Cards -->
+    <!-- ============================================================== -->
+    <main class="main-content" id="main-content" role="main">
+
+      <!-- Top Search Input Bar -->
+      <div style="position: relative;">
+        <span style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; pointer-events: none;">🔎</span>
+        <input 
+          type="text" 
+          id="mainSearchInput" 
+          class="neo-search-input" 
+          placeholder="快速搜索乐谱、修音混音、课件PPT、装机、AI、雪菲力..."
+          aria-label="全局搜索"
+          style="width: 100%; padding: 12px 16px 12px 44px; border: var(--border-thick); box-shadow: var(--shadow-md); border-radius: var(--radius-md); font-size: 0.95rem; font-weight: 700; background: #FFF;"
+        >
+      </div>
+
+      <!-- Top Featured Carousel / Showcase Cards (.blog-slider) -->
+      <section class="featured-slider-box" id="featuredSlider" aria-label="置顶推荐专区">
+        <div class="slider-header-row">
+          <div style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 900; display: flex; align-items: center; gap: 8px;">
+            <span>如果你进入了这个网站，你一定是为了...</span>
+          </div>
+          <span class="neo-badge badge-yellow">FEATURED</span>
+        </div>
+
+        <div class="slider-cards-scroll">
+          <!-- 1. 雪菲力特供卡 -->
+          <div class="featured-slide-card" style="border-left-width: 6px; border-left-color: var(--neo-orange);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <span class="neo-badge badge-orange">老哈味</span>
+                <span style="font-size: 0.72rem; font-weight: 800;">一级经销</span>
+              </div>
+              <h3 style="font-size: 1.05rem; font-weight: 900; margin-bottom: 4px;">
+                哈尔滨雪菲力汽水整箱
+              </h3>
+              <p style="font-size: 0.8rem; color: #555; line-height: 1.4; margin-bottom: 8px;">
+                经典荔枝/甜橙味24瓶整箱批零！餐饮团购，哈尔滨同城直发。
+              </p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 6px; border-top: var(--border-thin);">
+              <div style="font-family: var(--font-display); font-weight: 900;">¥ 48 / 箱</div>
+              <button onclick="document.querySelector('.btn-add-cart[data-id=\\'xuefeili-01\\']')?.click() || alert('已加入咨询单！');" class="neo-btn neo-btn-sm neo-btn-orange">
+                + 订购
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. 音频混音母带卡 -->
+          <div class="featured-slide-card" style="border-left-width: 6px; border-left-color: var(--neo-pink);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <span class="neo-badge badge-pink">棚级音质</span>
+                <span style="font-size: 0.72rem; font-weight: 800;">专业混音</span>
+              </div>
+              <h3 style="font-size: 1.05rem; font-weight: 900; margin-bottom: 4px;">
+                录音贴唱修音与混音母带
+              </h3>
+              <p style="font-size: 0.8rem; color: #555; line-height: 1.4; margin-bottom: 8px;">
+                Melodyne 纯手工精校音准节奏，流媒体广播级响度母带。
+              </p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 6px; border-top: var(--border-thin);">
+              <div style="font-family: var(--font-display); font-weight: 900;">¥ 80 起</div>
+              <button onclick="document.querySelector('.btn-view-detail[data-id=\\'audio-01\\']')?.click();" class="neo-btn neo-btn-sm neo-btn-pink">
+                试听详情
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. 乐谱精选卡 -->
+          <div class="featured-slide-card" style="border-left-width: 6px; border-left-color: var(--neo-cyan);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <span class="neo-badge badge-cyan">海量原版</span>
+                <span style="font-size: 0.72rem; font-weight: 800;">数字高清</span>
+              </div>
+              <h3 style="font-size: 1.05rem; font-weight: 900; margin-bottom: 4px;">
+                Musicnotes / YouTube 热门乐谱
+              </h3>
+              <p style="font-size: 0.8rem; color: #555; line-height: 1.4; margin-bottom: 8px;">
+                周杰伦、Animenz、古典名家全集五线谱，带和弦指法。
+              </p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 6px; border-top: var(--border-thin);">
+              <div style="font-family: var(--font-display); font-weight: 900;">¥ 15 起</div>
+              <button onclick="document.querySelector('.btn-view-detail[data-id=\\'sheet-01\\']')?.click();" class="neo-btn neo-btn-sm neo-btn-cyan">
+                查看乐谱
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. 免费专区福利卡 -->
+          <div class="featured-slide-card" style="border-left-width: 6px; border-left-color: var(--neo-green);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <span class="neo-badge badge-green">100% FREE</span>
+                <span style="font-size: 0.72rem; font-weight: 800;">福利赠送</span>
+              </div>
+              <h3 style="font-size: 1.05rem; font-weight: 900; margin-bottom: 4px;">
+                免费钢琴谱包 & 混音预设
+              </h3>
+              <p style="font-size: 0.8rem; color: #555; line-height: 1.4; margin-bottom: 8px;">
+                20首热门钢琴曲谱包 + 经典卷积混响 IR 预设文件直接领！
+              </p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 6px; border-top: var(--border-thin);">
+              <div style="font-family: var(--font-display); font-weight: 900; color: #00873E;">¥ 0.00</div>
+              <button onclick="document.querySelector('.btn-view-detail[data-id=\\'free-01\\']')?.click();" class="neo-btn neo-btn-sm neo-btn-green">
+                免费领
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Result Count Info -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 2px 4px;">
+        <div style="font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+          <span style="display: inline-block; width: 10px; height: 10px; background: #000;"></span>
+          <span id="resultCountLabel">正在加载展柜...</span>
+        </div>
+
+      </div>
+
+      <!-- Alternating Horizontal Cards (.recent-posts) -->
+      <section class="recent-posts" id="recent-posts-wrapper" aria-label="核心展示流">
+        <!-- Populated dynamically via filter-search.js -->
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- 4. BUTTERFLY-STYLE FOOTER (#footer)                              -->
+  <!-- ================================================================ -->
+  <footer id="footer" role="contentinfo">
+    <div class="copyright">
+      &copy; 2026 By <span id="footerSiteName">RUI的小站</span> · All Rights Reserved.
+    </div>
+    <div class="framework-info" style="font-size: 0.82rem; color: #555;">
+      <span>Visual: </span><strong>Neobrutalism UI</strong>
+      <span style="margin: 0 6px;">|</span>
+      <span>Layout: </span><strong>EdNovas Style (Left Aside + Main Stream)</strong>
+    </div>
+    <div class="footer_custom_text">
+      🎉 已经到底啦！再往下划要坏掉啦！
+    </div>
+  </footer>
+
+  <!-- ================================================================ -->
+  <!-- 5. FLOATING TOOL BUTTONS (Right-Bottom Corner)                   -->
+  <!-- ================================================================ -->
+  <div class="floating-tool-group">
+    <!-- Back to Top Button -->
+    <button id="toTopBtn" class="floating-pill-btn" style="background: #FFF; display: none;" title="返回顶部">
+      <span>顶部</span>
+    </button>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- 6. MODALS & POPUPS                                               -->
+  <!-- ================================================================ -->
+
+  <!-- Detail Modal Dialog Backdrop -->
+  <div class="neo-modal-backdrop" id="detailModalBackdrop" role="dialog" aria-modal="true">
+    <div class="neo-modal-box">
+      <div class="modal-header">
+        <div class="modal-title">项目详情与交付指南</div>
+        <button class="modal-close-btn" id="modalCloseBtn">✕</button>
+      </div>
+      <div class="modal-body" id="modalDynamicContent">
+        <!-- Injected via modal.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Neobrutalism Action Toast Notification -->
+  <div class="neo-toast" id="neoToast" role="status" aria-live="polite">
+    <span style="font-size: 1.2rem;">⚡</span>
+    <span class="toast-text">操作已完成</span>
+  </div>
+
+  <!-- Main Application Script -->
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+</html>

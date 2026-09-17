@@ -1,0 +1,536 @@
+/* ==========================================================================
+   NEOBRUTALISM COMPONENTS (EDNOVAS ASIDE WIDGETS & CARDS)
+   ========================================================================== */
+
+/* Universal Neo Card */
+.neo-card {
+  background: var(--bg-card);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  position: relative;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Base Card Widget for Left Aside */
+.card-widget {
+  background: #FFFFFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  position: relative;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.card-widget:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.item-headline {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: var(--border-thin);
+}
+
+/* 1. EDNOVAS CARD-INFO (Author Profile Widget) */
+.card-info {
+  text-align: center;
+}
+
+.card-info-avatar {
+  margin: 0 auto 12px;
+  width: 90px;
+  height: 90px;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-pill);
+  background: var(--neo-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  overflow: hidden;
+}
+
+.author-info__name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.author-info__description {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 14px;
+  background: #FAF6ED;
+  padding: 6px 10px;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+}
+
+.card-info-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 8px 0;
+  border-top: var(--border-thin);
+  border-bottom: var(--border-thin);
+}
+
+.card-info-data-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-info-data-item .headline {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.card-info-data-item .length-num {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #000;
+}
+
+.card-info-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  background: var(--neo-cyan);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.92rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.08s ease;
+}
+
+.card-info-btn:hover {
+  background: var(--neo-yellow);
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-info-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #000;
+}
+
+.card-info-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* 2. EDNOVAS CARD-ANNOUNCEMENT (Announcement Widget) */
+.announcement_content {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #222;
+  font-weight: 600;
+}
+
+/* 3. EDNOVAS CARD-CATEGORIES & TAGS (Categories & Tag Cloud) */
+.card-category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-category-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background: #FAF6ED;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.08s ease;
+}
+
+.card-category-list-item:hover,
+.card-category-list-item.active {
+  background: var(--neo-yellow);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-category-list-item:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 #000;
+}
+
+.card-category-list-count {
+  background: #000;
+  color: #FFF;
+  font-size: 0.72rem;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+}
+
+/* Tags cloud inside categories widget */
+.aside-tag-box {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: var(--border-thin);
+}
+
+.aside-tag-title {
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.aside-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.aside-tag-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  background: #FFF;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.08s ease;
+}
+
+.aside-tag-pill:hover,
+.aside-tag-pill.active {
+  background: var(--neo-cyan);
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* 4. EDNOVAS CARD-WEBINFO (Site Stats Widget) */
+.webinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.webinfo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px dashed #DDD;
+}
+
+.webinfo-item:last-child {
+  border-bottom: none;
+}
+
+/* Badges & Buttons */
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: var(--border-thin);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  background: var(--neo-yellow);
+  color: #000;
+  line-height: 1.2;
+}
+
+.badge-pink { background: var(--neo-pink); }
+.badge-green { background: var(--neo-green); }
+.badge-cyan { background: var(--neo-cyan); }
+.badge-purple { background: var(--neo-purple); }
+.badge-orange { background: var(--neo-orange); }
+.badge-lime { background: var(--neo-lime); }
+.badge-blue { background: var(--neo-blue); color: #000; }
+
+.neo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.92rem;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  background-color: var(--neo-yellow);
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  white-space: nowrap;
+}
+
+.neo-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.neo-btn:active {
+  transform: translate(4px, 4px) !important;
+  box-shadow: 0px 0px 0 #000 !important;
+}
+
+.neo-btn-pink { background-color: var(--neo-pink); }
+.neo-btn-green { background-color: var(--neo-green); }
+.neo-btn-cyan { background-color: var(--neo-cyan); }
+.neo-btn-purple { background-color: var(--neo-purple); }
+.neo-btn-orange { background-color: var(--neo-orange); }
+.neo-btn-white { background-color: #FFFFFF; }
+.neo-btn-sm {
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  box-shadow: var(--shadow-sm);
+}
+.neo-btn-sm:hover {
+  box-shadow: var(--shadow-md);
+}
+.neo-btn-sm:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 0 0 0 #000 !important;
+}
+
+.card-category-pill {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+}
+
+.feature-tag {
+  background: #FAF6ED;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 2px 7px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-block;
+  cursor: pointer;
+}
+.feature-tag:hover {
+  background: var(--neo-cyan);
+}
+
+/* Full Article Reading Card */
+.article-card-full {
+  background: #FFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  padding: 28px;
+}
+
+.article-card-full h2 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.article-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: var(--border-thin);
+}
+
+.article-body {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #1a1a1a;
+}
+.article-body p {
+  margin-bottom: 16px;
+}
+
+/* Modals */
+.neo-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(2px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.neo-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.neo-modal-box {
+  background: #FFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-xl);
+  border-radius: var(--radius-lg);
+  max-width: 620px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.96) translateY(10px);
+  transition: transform 0.15s ease;
+}
+
+.neo-modal-backdrop.open .neo-modal-box {
+  transform: scale(1) translateY(0);
+}
+
+.modal-header {
+  background: var(--neo-yellow);
+  border-bottom: var(--border-thick);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.modal-close-btn {
+  width: 34px;
+  height: 34px;
+  background: #FFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.08s;
+}
+
+.modal-close-btn:hover {
+  background: var(--neo-pink);
+  transform: translate(-1px, -1px);
+}
+
+.modal-close-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #000;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* Cart Items List inside Cart Modal */
+.cart-items-list {
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #FAF6ED;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+}
+
+.cart-remove-btn {
+  background: #FFF;
+  border: var(--border-thin);
+  padding: 2px 8px;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+.cart-remove-btn:hover {
+  background: var(--neo-red);
+  color: #FFF;
+}
+
+/* Toast */
+.neo-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  background: var(--neo-yellow);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(120px);
+  opacity: 0;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
+}
+
+.neo-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}

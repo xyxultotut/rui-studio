@@ -1,0 +1,184 @@
+/* ==========================================================================
+   RETRO AUDIO CASSETTE PLAYER (NEOBRUTALISM STYLE)
+   ========================================================================== */
+
+.retro-audio-card {
+  background: #FFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.audio-header {
+  background: var(--neo-purple);
+  border-bottom: var(--border-thick);
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.audio-header h3 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cassette-visual {
+  background: #222;
+  border-bottom: var(--border-thick);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.cassette-tape-box {
+  width: 100%;
+  max-width: 240px;
+  background: #E5E5E5;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tape-window {
+  background: #111;
+  border: 2px solid #000;
+  border-radius: 4px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 16px;
+  position: relative;
+}
+
+.tape-reel {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #FFF;
+  background: radial-gradient(circle, #555 30%, #222 35%, #444 60%, #fff 65%, #222 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tape-reel.spinning {
+  animation: spinReel 2s linear infinite;
+}
+
+@keyframes spinReel {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tape-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: var(--neo-yellow);
+  padding: 2px 6px;
+  border: 1.5px solid #000;
+  text-align: center;
+  border-radius: 2px;
+}
+
+/* Audio Controls & Dry/Wet Switch */
+.audio-controls-area {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #FFF;
+}
+
+.mode-toggle-group {
+  display: flex;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-toggle-btn {
+  flex: 1;
+  padding: 6px 10px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  background: #FFF;
+  border: none;
+  transition: background 0.1s;
+}
+
+.mode-toggle-btn.active {
+  background: var(--neo-pink);
+  color: #000;
+}
+
+.mode-toggle-btn:first-child {
+  border-right: var(--border-thin);
+}
+
+.track-info-line {
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Playback bar */
+.playback-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.play-toggle-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--neo-green);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.play-toggle-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #000;
+}
+
+.progress-track {
+  flex: 1;
+  height: 12px;
+  background: #E5E5E5;
+  border: var(--border-thin);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--neo-cyan);
+  border-right: 2px solid #000;
+  transition: width 0.1s linear;
+}

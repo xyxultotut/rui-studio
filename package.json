@@ -1,0 +1,15 @@
+{
+  "name": "neobrutalism-personal-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000 --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.2",
+    "vite-plugin-singlefile": "^2.3.3"
+  }
+}

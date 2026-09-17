@@ -1,0 +1,493 @@
+/* ==========================================================================
+   EDNOVAS TWO-COLUMN LAYOUT (NATURAL PAGE SCROLLING, NO SEPARATE SCROLLBAR)
+   ========================================================================== */
+
+/* 1. TOP STICKY NAVIGATION BAR (#nav) */
+#nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: var(--bg-card);
+  border-bottom: var(--border-thick);
+  box-shadow: 0 4px 0 #000;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+#blog_name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#site-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #000;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#site-name:hover {
+  color: var(--neo-red);
+}
+
+.nav-menus {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-menu-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.88rem;
+  background: #FFF;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.08s ease;
+  user-select: none;
+}
+
+.nav-menu-item:hover,
+.nav-menu-item.active {
+  background: var(--neo-yellow);
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-menu-item:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #000;
+}
+
+/* 2. IMMERSIVE HERO HEADER (#page-header) */
+#page-header {
+  position: relative;
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 20px 64px;
+  background-color: var(--bg-ground);
+  background-image: 
+    linear-gradient(#00000015 1.5px, transparent 1.5px),
+    linear-gradient(90deg, #00000015 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  border-bottom: var(--border-thick);
+}
+
+#site-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 800px;
+}
+
+#site-title {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-shadow: 4px 4px 0 var(--neo-yellow), 8px 8px 0 #000;
+  margin: 0;
+}
+
+#site-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+  font-weight: 700;
+  background: #FFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-sm);
+  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background: #000;
+  vertical-align: middle;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+#site_social_icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.social-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #FFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.08s ease;
+}
+
+.social-icon-btn:hover {
+  background: var(--neo-cyan);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+.social-icon-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #000;
+}
+
+#scroll-down {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  font-size: 1.6rem;
+  animation: bounceDown 1.6s infinite ease-in-out;
+  user-select: none;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 8px); }
+}
+
+/* 3. MAIN TWO-COLUMN LAYOUT (.layout#content-inner) */
+.layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+/* LEFT SIDEBAR: Personal Profile, Announcement, Categories, Web Info
+   Follows natural page scroll with the main window - NO separate scrollbar!
+   Smart Bottom-Sticky: scrolls smoothly with page until bottom is reached, then sticks to bottom.
+   When scrolling up, smoothly returns back to top along with the main page! */
+.aside-content {
+  width: 300px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: -webkit-sticky;
+  position: sticky;
+  align-self: flex-start;
+  /* Completely disabled internal scrollbar and max-height */
+  max-height: none !important;
+  overflow-y: visible !important;
+  will-change: top;
+}
+
+/* Sub-container inside aside: static flow so entire aside acts as one cohesive unit */
+.sticky_layout {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* MAIN CONTENT AREA: Top Search, Featured Slider, Alternating Cards */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 4. TOP FEATURED CAROUSEL / SLIDER (.blog-slider) */
+.featured-slider-box {
+  background: #FFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: var(--border-thin);
+}
+
+.slider-cards-scroll {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.featured-slide-card {
+  background: #FAF6ED;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.1s ease;
+}
+
+.featured-slide-card:hover {
+  background: #FFF;
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* 5. ALTERNATING HORIZONTAL POST STREAM (.recent-posts) */
+.recent-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Base Post Item Container */
+.recent-post-item {
+  display: flex;
+  background: #FFFFFF;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  min-height: 220px;
+}
+
+.recent-post-item:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 #000;
+}
+
+/* Alternating Reverse Class (EdNovas Signature) */
+.recent-post-item.reverse {
+  flex-direction: row-reverse;
+}
+
+/* Graphic Cover Image / Block */
+.post_cover {
+  width: 32%;
+  min-width: 220px;
+  background-color: var(--neo-yellow);
+  border-right: var(--border-thick);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  text-align: center;
+  position: relative;
+  user-select: none;
+}
+
+.recent-post-item.reverse .post_cover {
+  border-right: none;
+  border-left: var(--border-thick);
+}
+
+.cover-emoji-large {
+  font-size: 3.8rem;
+  margin-bottom: 6px;
+  filter: drop-shadow(3px 3px 0 #000);
+}
+
+.cover-corner-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+/* Info Section */
+.recent-post-info {
+  flex: 1;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.article-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 900;
+  line-height: 1.25;
+  color: #000;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.article-title:hover {
+  color: var(--neo-red);
+}
+
+.article-meta-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.article-excerpt-text {
+  font-size: 0.88rem;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: var(--border-thin);
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* 6. BUTTERFLY-STYLE FOOTER (#footer) */
+#footer {
+  background-color: var(--bg-card);
+  border-top: var(--border-thick);
+  padding: 40px 20px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer_custom_text {
+  background: var(--neo-yellow);
+  display: inline-block;
+  padding: 4px 14px;
+  border: var(--border-thin);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  margin-top: 6px;
+}
+
+/* 7. FLOATING TOOLS (Right-Bottom Corner) */
+.floating-tool-group {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.floating-pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--neo-yellow);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.08s ease;
+}
+
+.floating-pill-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #000;
+}
+
+.floating-pill-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 #000;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 960px) {
+  .layout {
+    flex-direction: column;
+  }
+  .aside-content {
+    width: 100%;
+    position: static !important;
+    top: auto !important;
+  }
+  .sticky_layout {
+    position: static;
+  }
+}
+
+@media (max-width: 680px) {
+  .recent-post-item,
+  .recent-post-item.reverse {
+    flex-direction: column;
+  }
+  .post_cover {
+    width: 100%;
+    min-height: 140px;
+    border-right: none !important;
+    border-left: none !important;
+    border-bottom: var(--border-thick);
+  }
+  .recent-post-info {
+    padding: 16px;
+  }
+}
