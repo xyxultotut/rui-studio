@@ -16,6 +16,8 @@ export class FilterSearchEngine {
     this.currentCategory = 'all';
     this.searchQuery = '';
     this.activeTag = null;
+    this.displayLimit = 36;
+    this.BATCH_SIZE = 36;
 
     this.searchInput = document.getElementById('mainSearchInput');
     this.resultCountLabel = document.getElementById('resultCountLabel');
@@ -122,6 +124,8 @@ export class FilterSearchEngine {
   setCategory(catId) {
     this.currentCategory = catId;
     this.activeTag = null;
+    this.displayLimit = 36;
+    this.BATCH_SIZE = 36;
     this.renderAsideCategories();
     this.render();
 
@@ -134,6 +138,7 @@ export class FilterSearchEngine {
 
   setTag(tag) {
     this.activeTag = tag;
+    this.displayLimit = 36;
     this.render();
 
     const postsEl = document.getElementById('recent-posts-wrapper');
@@ -219,6 +224,8 @@ export class FilterSearchEngine {
           if (this.searchInput) this.searchInput.value = '';
           this.currentCategory = 'all';
           this.activeTag = null;
+    this.displayLimit = 36;
+    this.BATCH_SIZE = 36;
           this.renderAsideCategories();
           this.render();
         });
@@ -258,7 +265,10 @@ export class FilterSearchEngine {
     }
 
     // EdNovas Alternating Horizontal Cards (.recent-post-item / .reverse)
-    this.container.innerHTML = items.map((item, index) => {
+    const visibleItems = (this.searchQuery || items.length <= this.displayLimit) ? items : items.slice(0, this.displayLimit);
+    const hasMore = items.length > visibleItems.length;
+
+    let cardsHtml = visibleItems.map((item, index) => {
       const isReverse = index % 2 === 1;
       const catColor = this.getCategoryColor(item.category);
       const catEmoji = this.getCategoryEmoji(item.category);
@@ -266,11 +276,12 @@ export class FilterSearchEngine {
       return `
         <div class="recent-post-item ${isReverse ? 'reverse' : ''}" data-id="${item.id}">
           <!-- Cover Side -->
-          <div class="post_cover" style="background-color: ${catColor};">
-            <span class="cover-corner-tag neo-badge ${item.badgeColor || 'badge-yellow'}">
+          <div class="post_cover" style="background-color: ${catColor}; position: relative; overflow: hidden;">
+            <span class="cover-corner-tag neo-badge ${item.badgeColor || 'badge-yellow'}" style="z-index: 3;">
               ${item.badge || '精选'}
             </span>
-            <div class="cover-emoji-large">${catEmoji}</div>
+            ${item.coverImage ? `<img src="${item.coverImage}" alt="" loading="lazy" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;" onerror="this.style.display='none';">` : ''}
+            <div class="cover-emoji-large" style="z-index: 2;">${catEmoji}</div>
             <div style="font-family: var(--font-display); font-weight: 900; font-size: 0.88rem; background: #FFF; border: var(--border-thin); border-radius: var(--radius-sm); padding: 3px 8px; box-shadow: var(--shadow-sm);">
               ${this.getCategoryName(item.category)}
             </div>
@@ -317,6 +328,28 @@ export class FilterSearchEngine {
         </div>
       `;
     }).join('');
+
+    if (hasMore) {
+      cardsHtml += `
+        <div style="text-align: center; margin: 30px 0 10px; grid-column: 1/-1;">
+          <button id="btnLoadMorePlugins" class="neo-btn neo-btn-yellow" style="padding: 12px 32px; font-size: 1.05rem; font-weight: 900; box-shadow: var(--shadow-md);">
+            ⚡ 加载更多音频展品 (已呈现 ${visibleItems.length} / 共 ${items.length} 个)
+          </button>
+        </div>
+      `;
+    }
+
+    this.container.innerHTML = cardsHtml;
+
+    if (hasMore) {
+      const loadMoreBtn = document.getElementById('btnLoadMorePlugins');
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+          this.displayLimit += this.BATCH_SIZE;
+          this.render();
+        });
+      }
+    }
   }
 
   getCategoryName(catId) {

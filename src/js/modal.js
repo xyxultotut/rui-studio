@@ -46,6 +46,13 @@ export class DetailModal {
         <span class="neo-badge badge-lime">${item.category}</span>
       </div>
 
+      
+      ${item.coverImage ? `
+        <div style="text-align: center; margin-bottom: 14px; background: #000; border-radius: var(--radius-md); overflow: hidden; max-height: 240px; display: flex; align-items: center; justify-content: center; border: var(--border-thin);">
+          <img src="${item.coverImage}" alt="" style="max-width: 100%; max-height: 240px; object-fit: contain;">
+        </div>
+      ` : ''}
+
       <h2 style="font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; line-height: 1.25;">
         ${item.title}
       </h2>

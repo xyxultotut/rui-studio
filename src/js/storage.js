@@ -6,7 +6,7 @@
 import { CATEGORIES, ITEMS_DATA } from './data.js';
 
 const STORAGE_KEYS = {
-  ITEMS: 'neobrutalism_site_items_v3',
+  ITEMS: 'neobrutalism_site_items_v4',
   SITE_CONFIG: 'neobrutalism_site_config_v2'
 };
 
